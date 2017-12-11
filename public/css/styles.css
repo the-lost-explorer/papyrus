@@ -1,4 +1,88 @@
+html, body {
+    overflow: hidden;
+    background: black;
+    color: green;
+}
 
-.blackboard{
-    padding:0px;margin:0px;
+#blackboard{
+    padding:0px;
+    margin:0px;
+    cursor: url('http://localhost:8001/public/?filePath=img/white.cur'), auto;  
+    background: black;
+   
+    position:absolute;
+}
+
+#color-pallet{
+    display: inline-block;
+}
+
+#white{
+    background: white;
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    display: inline-block;
+    border-radius: 100%;
+}
+
+#yellow{
+    background: yellow;
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    display: inline-block;
+    border-radius: 100%;
+}
+
+#red{
+    background: red;
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    display: inline-block;
+    border-radius: 100%;
+}
+
+
+#green{
+    background: green;
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    display: inline-block;
+    border-radius: 100%;
+}
+
+
+#blue{
+    background: blue;
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    display: inline-block;
+    border-radius: 100%;
+}
+
+
+#black{
+    background:#000000;
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+#blue:hover,#red:hover,#yellow:hover,#red:hover,#white:hover,#green:hover{
+    cursor: url('http://localhost:8001/public/?filePath=img/black.cur'), auto;
+    border-radius: 0%;
+}
+
+#black{
+    border: 1px solid white;
+}
+
+#black:hover{
+    cursor: hand;
+    border-radius: 100%;
 }

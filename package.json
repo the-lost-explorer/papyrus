@@ -1,0 +1,24 @@
+{
+  "name": "papyrus",
+  "version": "1.0.0",
+  "description": "An online blackboard for teachers and learners to collaborate. For Free. For everyone. Forever.\r Once done papyrus will be a webapp build for the teachers and learners to collaborate and study online. The project will be based on node.js.\r The key parts of it's development go as follows:",
+  "main": "server.js",
+  "scripts": {
+    "test": "server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/the-lost-explorer/papyrus"
+  },
+  "keywords": [
+    "blackboard"
+  ],
+  "author": "Amey Parundekar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "*",
+    "morgan": "*",
+    "path": "*"
+  } 
+}

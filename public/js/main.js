@@ -1,38 +1,53 @@
 $(document).ready(function(){
-  var canvas = $('.blackboard');
+  window.addEventListener('resize', onResize, false);  
+  //Resizing shit
+  var letsdraw = false;
+  var board = document.getElementById('blackboard');
+  var boardQ = $('#blackboard');
   var colors = $('.colors');
-  var current = {
-    color: 'black'
-  };
-
-  window.addEventListener('resize', onResize, false);
+  currentColor = 'white';
+  var draw = board.getContext('2d');
   onResize();
+  $('.color').on("click",function(){
+    currentColor = this.id;
+    cursorImage = 'http://localhost:8001/public/?filePath=img/'+currentColor+'.cur';
+    console.log(cursorImage);
+    $("#blackboard").css('cursor','url('+String(cursorImage)+',auto)');
+  });
 
-  canvas.mousedown(function(e1){
-      e1.currentX = e1.clientX, e1.currentY = e1.clientY;
-    canvas.mousemove(function(e2){
-         var msg = "Handler for .mousemove() called at ";
-         msg += e2.clientX + ", " + e2.clientY;
-         $( "#log" ).html( "<div>" + msg + "</div>" );
+  var canvasOffset = $('#blackboard').offset();
 
-          canvas.drawLine({
-      strokeStyle: '#000',
-      strokeWidth: 1,
-      x1: e1.currentX, y1: e1.currentY,
-      x2: e2.clientX, y2: e2.clientY
-      
-          });
-          e1.currentX = e2.clientX, e1.currentY = e2.clientY;
-    });
-
-   
-});
-
-  function onResize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  function onResize(){
+    board.width = window.innerWidth - 15;
+    board.height = window.innerHeight - 120;
   }
 
+  boardQ.mousemove(function(e){
+    if (letsdraw === true) {
+        draw.lineTo(e.pageX - canvasOffset.left, e.pageY - canvasOffset.top);
+        draw.stroke();
+    }
+
+    boardQ.mousedown(function(){
+      letsdraw = true;
+      draw.strokeStyle = currentColor;
+
+      if(currentColor == 'black'){
+        draw.lineWidth = 100;
+      }else{
+        draw.lineWidth = 2;
+      }
+      draw.lineCap = 'round';
+      draw.beginPath();
+      draw.moveTo(e.pageX - canvasOffset.left, e.pageY - canvasOffset.top);
+    });
+  });
   
+
   
+
+  $(window).mouseup(function() {
+    letsdraw = false;
+  });
+
 });
