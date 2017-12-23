@@ -9,8 +9,8 @@ html, body {
     margin:0px;
     cursor: url('http://localhost:8001/public/?filePath=img/white.cur'), auto;  
     background: black;
-   
     position:absolute;
+    border: 1px solid white;
 }
 
 #color-pallet{

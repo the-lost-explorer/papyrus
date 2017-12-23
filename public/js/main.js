@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  
   window.addEventListener('resize', onResize, false);  
   //Resizing shit
   var letsdraw = false;
@@ -12,7 +13,7 @@ $(document).ready(function(){
     currentColor = this.id;
     cursorImage = 'http://localhost:8001/public/?filePath=img/'+currentColor+'.cur';
     console.log(cursorImage);
-    $("#blackboard").css('cursor','url('+String(cursorImage)+',auto)');
+    boardQ.css('cursor','url('+cursorImage+'), auto');
   });
 
   var canvasOffset = $('#blackboard').offset();
@@ -33,7 +34,7 @@ $(document).ready(function(){
       draw.strokeStyle = currentColor;
 
       if(currentColor == 'black'){
-        draw.lineWidth = 100;
+        draw.lineWidth = 45;
       }else{
         draw.lineWidth = 2;
       }
