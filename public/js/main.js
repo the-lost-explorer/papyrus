@@ -1,5 +1,8 @@
 $(document).ready(function(){
-  
+  //Socket
+  var socket = io();
+
+  //Drawing
   window.addEventListener('resize', onResize, false);  
   //Resizing shit
   var letsdraw = false;
@@ -24,28 +27,30 @@ $(document).ready(function(){
   }
 
   boardQ.mousemove(function(e){
+    socket.emit('drawing',[e.pageX,e.pageY])
     if (letsdraw === true) {
-        draw.lineTo(e.pageX - canvasOffset.left, e.pageY - canvasOffset.top);
-        draw.stroke();
+        socket.on('drawing',function(coordinates){
+          draw.lineTo(coordinates[0] - canvasOffset.left, coordinates[1] - canvasOffset.top);
+          draw.stroke();
+        });
     }
 
     boardQ.mousedown(function(){
+      socket.emit('drawing',[e.pageX,e.pageY])
       letsdraw = true;
-      draw.strokeStyle = currentColor;
-
-      if(currentColor == 'black'){
-        draw.lineWidth = 45;
-      }else{
-        draw.lineWidth = 2;
-      }
-      draw.lineCap = 'round';
-      draw.beginPath();
-      draw.moveTo(e.pageX - canvasOffset.left, e.pageY - canvasOffset.top);
+      socket.on('drawing',function(coordinates){
+        draw.strokeStyle = currentColor;
+        if(currentColor == 'black'){
+          draw.lineWidth = 45;
+        }else{
+          draw.lineWidth = 2;
+        }
+        draw.lineCap = 'round';
+        draw.beginPath();
+        draw.moveTo(coordinates[0] - canvasOffset.left, coordinates[1] - canvasOffset.top);
+      });
     });
   });
-  
-
-  
 
   $(window).mouseup(function() {
     letsdraw = false;
